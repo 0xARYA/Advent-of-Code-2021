@@ -4,22 +4,19 @@ class BingoBoard {
 
     this.block = block;
 
-    this.grid = block
-      .split('\n')
-      .map(row =>
-        row
-          .trim()
-          .split(/\s+/)
-          .map(rowValue => parseInt(rowValue, 10))
-      );
+    this.grid = block.split('\n').map(row =>
+      row
+        .trim()
+        .split(/\s+/)
+        .map(rowValue => parseInt(rowValue, 10))
+    );
 
     this.size = this.grid.length;
 
     this.cells = {};
 
     for (let row = 0; row < this.grid.length; row += 1) {
-      for (let column = 0; column < this.grid[row].length; column += 1) 
-        this.cells[this.grid[row][column]] = [row, column];
+      for (let column = 0; column < this.grid[row].length; column += 1) this.cells[this.grid[row][column]] = [row, column];
     }
 
     this.rows = Array(this.size).fill(0);
@@ -53,8 +50,7 @@ class BingoBoard {
   }
 
   getScore(called) {
-    const uncalled = this.getUncalled(called),
-      uncalledSum = uncalled.reduce((a, b) => a + b, 0);
+    const uncalledSum = this.getUncalled(called).reduce((a, b) => a + b, 0);
 
     return uncalledSum * called[called.length - 1];
   }
